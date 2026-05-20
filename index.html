@@ -6,7 +6,7 @@
     <title>Lilac Safe Zone 🪻🌙</title>
     
     <style>
-        /* 🌌 พื้นหลังและแสงไฟ Dark Mode */
+        /* 🌌 1. พื้นหลังและแสงไฟ Dark Mode */
         body {
             margin: 0;
             padding: 0;
@@ -40,7 +40,7 @@
             100% { transform: translate(60px, 60px) scale(1.1); }
         }
 
-        /* 📦 กล่องและดอกไม้ */
+        /* 📦 2. กล่องและดอกไม้ */
         .card-wrapper {
             position: relative; z-index: 10;
             display: flex; align-items: center; justify-content: center;
@@ -62,12 +62,12 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); z-index: 10;
         }
 
-        /* 🖼️ รูปภาพวงกลมเป๊ะๆ */
+        /* 🖼️ 3. รูปภาพวงกลมเป๊ะๆ */
         .center-photo {
             width: 120px;
             aspect-ratio: 1 / 1; /* บังคับสัดส่วนจัตุรัส */
             border-radius: 50%;  /* ตัดเป็นวงกลม */
-            object-fit: cover;
+            object-fit: cover;   /* ป้องกันรูปยืดเบี้ยว */
             border: 3px solid rgba(212, 165, 255, 0.5);
             box-shadow: 0 0 20px rgba(212, 165, 255, 0.2);
             margin-bottom: 20px;
@@ -78,7 +78,7 @@
             margin: 0 0 25px 0; white-space: nowrap;
         }
 
-        /* 🔑 ช่องรหัสและปุ่มกด */
+        /* 🔑 4. ช่องรหัสและปุ่มกด */
         .input-group { display: flex; flex-direction: column; gap: 15px; }
 
         input[type="password"] {
@@ -111,11 +111,12 @@
     <div class="light light-2"></div>
 
     <div class="card-wrapper">
-        <img src="left-removebg-preview.png" alt="Lilac Right" class="lilac-decor lilac-left">
-        <img src="right-removebg-preview.png" alt="Lilac Left" class="lilac-decor lilac-right">
+        <img src="right-removebg-preview.png" alt="Lilac Left" class="lilac-decor lilac-left">
+        <img src="left-removebg-preview.png" alt="Lilac Right" class="lilac-decor lilac-right">
 
         <div class="glass-box">
             <img src="Lilac 2.jpg" alt="Our Photo" class="center-photo">
+            
             <h1 class="main-title">Lilac 🪻</h1>
             
             <div class="input-group">
@@ -126,32 +127,34 @@
     </div>
 
     <script>
-        // 🧠 ตรวจสอบความจำตอนเปิดเว็บ
+        // 🧠 1. ตรวจสอบความจำตอนเปิดเว็บ (จำรหัสผ่าน)
         window.onload = function() {
             if (localStorage.getItem('safeZoneUnlocked') === 'true') {
-                window.location.href = 'next.html'; 
+                window.location.href = 'next.html'; // 📌 ต้องมีไฟล์ชื่อ next.html อยู่ด้วยนะ
             }
         }
 
-        // ⚙️ ฟังก์ชันเช็ครหัสผ่าน
+        // ⚙️ 2. ฟังก์ชันเช็ครหัสผ่าน (รองรับพิมพ์เล็ก/พิมพ์ใหญ่)
         function checkPassword() {
-            const pass = document.getElementById('passInput').value.ToLowerCase();
-            const correctPassword = 'lilac'; // 📌 ตั้งรหัสผ่านที่นี่
+            const pass = document.getElementById('passInput').value.toLowerCase();
+            
+            // 📌 ตั้งรหัสผ่านตรงนี้ (ให้พิมพ์เป็น "ตัวพิมพ์เล็กล้วน" ทั้งหมดครับ)
+            const correctPassword = 'lilac'; 
 
             if (pass === correctPassword) {
                 localStorage.setItem('safeZoneUnlocked', 'true');
-                window.location.href = 'next.html'; // 📌 หน้าถัดไป
+                window.location.href = 'next.html'; // 📌 เปลี่ยนไปหน้าถัดไป
             } else {
                 alert('รหัสผ่านไม่ถูกต้องค่ะ ลองใหม่อีกทีน้า 🥺');
                 document.getElementById('passInput').value = '';
             }
         }
 
-        // ⌨️ ฟังก์ชันเมื่อกด "Enter" ที่ช่องพิมพ์รหัส
+        // ⌨️ 3. ฟังก์ชันดักจับการกดปุ่ม Enter
         document.getElementById("passInput").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
-                event.preventDefault(); // ป้องกันเว็บรีเฟรชเอง
-                checkPassword();        // เรียกใช้ฟังก์ชันเช็ครหัสอันเดียวกับการคลิกปุ่ม
+                event.preventDefault(); 
+                checkPassword();        
             }
         });
     </script>
