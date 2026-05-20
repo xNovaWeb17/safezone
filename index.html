@@ -129,7 +129,7 @@
     <script>
         // 🧠 1. ตรวจสอบความจำตอนเปิดเว็บ (จำรหัสผ่าน)
         window.onload = function() {
-            if (localStorage.getItem('safeZoneUnlocked') === 'true') {
+            if (localStorage.getItem('safeZoneUnlocked') === 'false') {
                 window.location.href = 'next.html'; // 📌 ต้องมีไฟล์ชื่อ next.html อยู่ด้วยนะ
             }
         }
