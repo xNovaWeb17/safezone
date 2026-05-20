@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilac Safe Zone 🪻🌙</title>
+    
+    <style>
+        /* 🌌 พื้นหลังและแสงไฟ Dark Mode */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background-color: #0d0914; 
+        }
+
+        .light {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: 1;
+            opacity: 0.5;
+        }
+        .light-1 {
+            width: 350px; height: 350px; background: #7a28cb;
+            top: 5%; left: 15%; animation: float 12s infinite alternate ease-in-out;
+        }
+        .light-2 {
+            width: 400px; height: 400px; background: #b05cba;
+            bottom: 5%; right: 10%; animation: float 15s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 60px) scale(1.1); }
+        }
+
+        /* 📦 กล่องและดอกไม้ */
+        .card-wrapper {
+            position: relative; z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .lilac-decor {
+            position: absolute; width: 120px; height: auto; z-index: 15;
+            pointer-events: none; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+        }
+        .lilac-left { left: -55px; transform: rotate(-15deg); }
+        .lilac-right { right: -55px; transform: rotate(15deg); }
+
+        .glass-box {
+            background: rgba(30, 20, 45, 0.4);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 25px; padding: 40px 30px;
+            width: 320px; text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); z-index: 10;
+        }
+
+        /* 🖼️ รูปภาพวงกลมเป๊ะๆ */
+        .center-photo {
+            width: 120px;
+            aspect-ratio: 1 / 1; /* บังคับสัดส่วนจัตุรัส */
+            border-radius: 50%;  /* ตัดเป็นวงกลม */
+            object-fit: cover;
+            border: 3px solid rgba(212, 165, 255, 0.5);
+            box-shadow: 0 0 20px rgba(212, 165, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-size: 20px; color: #e0b1cb; font-weight: bold;
+            margin: 0 0 25px 0; white-space: nowrap;
+        }
+
+        /* 🔑 ช่องรหัสและปุ่มกด */
+        .input-group { display: flex; flex-direction: column; gap: 15px; }
+
+        input[type="password"] {
+            padding: 12px 20px; border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3); font-size: 16px; color: #ffffff;
+            outline: none; text-align: center; transition: 0.3s;
+        }
+        input[type="password"]::placeholder { color: rgba(255, 255, 255, 0.4); }
+        input[type="password"]:focus {
+            border-color: #9d4edd; background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+        }
+
+        .submit-btn {
+            background: #5a189a; color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px; border-radius: 50px;
+            font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            background: #7b2cbf; transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(123, 44, 191, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="light light-1"></div>
+    <div class="light light-2"></div>
+
+    <div class="card-wrapper">
+        <img src="right-removebg-preview.png" alt="Lilac Left" class="lilac-decor lilac-left">
+        <img src="left-removebg-preview.png" alt="Lilac Right" class="lilac-decor lilac-right">
+
+        <div class="glass-box">
+            <img src="Lilac 2.jpg" alt="Our Photo" class="center-photo">
+            <h1 class="main-title">Lilac 🪻</h1>
+            
+            <div class="input-group">
+                <input type="password" id="passInput" placeholder="ใส่รหัสผ่านเพื่อไปต่อ...">
+                <button class="submit-btn" onclick="checkPassword()">ปลดล็อก 🗝️</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🧠 ตรวจสอบความจำตอนเปิดเว็บ
+        window.onload = function() {
+            if (localStorage.getItem('safeZoneUnlocked') === 'true') {
+                window.location.href = 'next.html'; 
+            }
+        }
+
+        // ⚙️ ฟังก์ชันเช็ครหัสผ่าน
+        function checkPassword() {
+            const pass = document.getElementById('passInput').value;
+            const correctPassword = 'Lilac'; // 📌 ตั้งรหัสผ่านที่นี่
+
+            if (pass === correctPassword) {
+                localStorage.setItem('safeZoneUnlocked', 'true');
+                window.location.href = 'next.html'; // 📌 หน้าถัดไป
+            } else {
+                alert('รหัสผ่านไม่ถูกต้องค่ะ ลองใหม่อีกทีน้า 🥺');
+                document.getElementById('passInput').value = '';
+            }
+        }
+
+        // ⌨️ ฟังก์ชันเมื่อกด "Enter" ที่ช่องพิมพ์รหัส
+        document.getElementById("passInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // ป้องกันเว็บรีเฟรชเอง
+                checkPassword();        // เรียกใช้ฟังก์ชันเช็ครหัสอันเดียวกับการคลิกปุ่ม
+            }
+        });
+    </script>
+
+</body>
+</html>
