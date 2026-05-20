@@ -127,10 +127,13 @@
     </div>
 
     <script>
-        // 🧠 1. ตรวจสอบความจำตอนเปิดเว็บ (จำรหัสผ่าน)
+        // 🧠 1. ตรวจสอบความจำตอนเปิดเว็บ (เปลี่ยนจากเด้งหน้า เป็นการกรอกรหัสให้อัตโนมัติแทน)
         window.onload = function() {
-            if (localStorage.getItem('safeZoneUnlocked') === 'false') {
-                window.location.href = 'next.html'; // 📌 ต้องมีไฟล์ชื่อ next.html อยู่ด้วยนะ
+        // ดึงรหัสผ่านที่เคยใส่ถูกจากความจำ (ถ้ามี)
+        const savedPassword = localStorage.getItem('mySavedPassword');
+        if (savedPassword) {
+            // ถ้าระบบจำได้ ให้เอาไปใส่ในช่องกรอกรหัสรอไว้เลย แฟนจะได้ไม่ต้องพิมพ์ใหม่
+            document.getElementById('passInput').value = savedPassword;
             }
         }
 
